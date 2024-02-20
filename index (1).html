@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html 
+	style="-webkit-user-select: none; /* Safari */
+  	-ms-user-select: none; /* IE 10 and IE 11 */
+  	user-select: none; /* Standard syntax */">
+	<head>
+		<title>Mr. Redsquare Jumper</title>
+		<link rel="icon" type="image/png" href="redsquare1.png">
+
+		<style>
+		canvas {
+		    border:1px solid #d3d3d3;
+		    background-color: #f1f1f1;
+		}
+		html {
+    -ms-touch-action: manipulation;
+        touch-action: manipulation;
+		}
+		</style>
+
+		
+
+	</head>
+
+<div id="sfcszpezpmjuty38gkg8kg9lgw282xmekl5" style="pointer-events: none; cursor: default;"></div><script type="text/javascript" src="https://counter10.optistats.ovh/private/counter.js?c=szpezpmjuty38gkg8kg9lgw282xmekl5&down=async" async></script><br><noscript><a href="https://www.freecounterstat.com" title="hit counters"><img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=szpezpmjuty38gkg8kg9lgw282xmekl5" border="0" title="hit counters" alt="hit counters"></a></noscript>
+
+<body id="bodyContainer" onload="startGame(); loadGame();" onkeyup="buttonPressed();" onkeydown="objectCharge();" style="background-color:white">
+
+	<center id="centerInfo" style="font-family: 'Courier New', monospace">
+		<!-- <p style="text-align:center; font-weight:bold; color:black; font-size:30px">Mr. Redsquare Jumper</p> -->
+		<img src="logo.png" width="100" height="100" style="cursor: pointer;" onclick="enableDarkMode();">
+		<p id ="statisticsEnabler" style="font-size:15px; cursor:pointer;" onclick="enableStatistics();">[Click to enable statistics]<br></p>
+		
+
+		<div id ="statistics" style="display:none; width:300px; padding-top:3px; list-style-type: none; font-size:11px; cursor:pointer; line-height:.1; background-color:#D9D9D9; border-radius: 10px" onclick="disableStatistics();">
+			<p id="objectHeightLine">Height of Mr. Redsquare: <span id="objectHeightcounter">?</span></p>
+			<p id="objectSpeedLine">Speed (Vertical) of Mr. Redsquare: <span id="objectSpeedCounter">?</span></p>
+			<p id="obstacleCounterLine">Total obstacles: <span id="obstacleCounter">?</span></p>
+			<p id="gameSpeedCounterLine">Game Speed: <span id="gameSpeedCounter">?</span></p>
+			<br>
+		</div>
+		
+		
+
+		<p style="font-size:14px;">The objective of Mr. Redsquare jumper is to dodge the green sludge. These sludges will make you lose if you hit them. <br> Click the "Jump" button or any key on your keyboard to jump. Your score increases the further you go. Have fun!</p>
+
+		<body>
+			<p><span id="visits"></span></p>
+		</body>
+	
+
+		<!-- <div id="sfcmyk1sst5c3de2ts63ttn3k26be4hplka" style="pointer-events: none; cursor: default;"></div><script type="text/javascript" src="https://counter10.optistats.ovh/private/counter.js?c=myk1sst5c3de2ts63ttn3k26be4hplka&down=async" async></script><noscript><a href="https://www.freecounterstat.com" title="web counter"><img src="https://counter10.optistats.ovh/private/freecounterstat.php?c=myk1sst5c3de2ts63ttn3k26be4hplka" border="0" title="web counter" alt="web counter"></a></noscript> -->
+
+		
+	</center>
+
+
+	<center id="centerInfoMobilePortrait" style="font-family: 'Courier New', monospace; display:none;" >
+		<!-- <p style="text-align:center; font-weight:bold; color:black; font-size:30px">Mr. Redsquare Jumper</p> -->
+		<img src="logo.png" width="300" height="300" onclick="enableDarkMode();">
+		
+		
+
+		<p style="font-size:20px;">The objective of Mr. Redsquare jumper is to dodge the green sludge. These sludges will make you lose if you hit them. Tap on the game area to jump. Your score increases the further you go. Have fun!</p>
+
+		
+	</center>
+
+	<center id="centerInfoMobileLandscape" style="font-family: 'Courier New', monospace; display:none;" >
+		<!-- <p style="text-align:center; font-weight:bold; color:black; font-size:30px">Mr. Redsquare Jumper</p> -->
+		<img src="logo.png" width=50px height=50px onclick="enableDarkMode();">
+
+		<p style="font-size:11px;">The objective of Mr. Redsquare jumper is to dodge the green sludge. These sludges will make you lose if you hit them. Tap on the game area to jump. Your score increases the further you go. Have fun!</p>
+
+	
+	</center>
+
+	
+
+<div id="myfilter" style="position:absolute;background-color:#000000;opacity:0.3;width:480px;height:270px;display:none;top: 100px; left: 0px; right: 0px; bottom: 0px; margin: auto;" onclick="restartGame()"></div>
+
+
+<button id="myrestartbutton" 
+				style="margin: 0; position: absolute; top: 56%;  left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); display:none; cursor:pointer;"
+				onclick="restartGame()">Restart?
+</button>
+
+
+<div id="jumpButton" style="margin: 0; position: absolute; top: 80%;  left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); display:block;">
+	<button onmousedown="objectCharge();" onmouseup="jumpPlayer();" style="cursor:pointer">JUMP</button>
+</div>
+
+<br>
+<br>
+
+<center id="highScoreContainer" style="margin: 0; position: absolute; top: 86%;  left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); display:block; font-family: 'Courier New', monospace;">
+	<p >High Score: <span id="highScoreCounter">0</span></p>
+
+	<br><br>
+</center>
+
+<center id="highScoreContainerMobilePortrait" style="margin: 0; position: absolute; top: 65%;  left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); display:none; font-family: 'Courier New', monospace;">
+	<p style="font-size: 40px;">High Score: <span id="highScoreCounter1">0</span></p>
+
+	<br><br>
+</center>
+
+<center id="highScoreContainerMobileLandscape" style="margin: 0; position: absolute; top: 83%;  left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); display:none; font-family: 'Courier New', monospace;">
+	<p >High Score: <span id="highScoreCounter2">0</span></p>
+
+	<br><br>
+</center>
+
+<p id="difficultyContainer" onclick="difficultySwap();" style="cursor: pointer; position:absolute; top: 87%;  left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); font-family: 'Courier New', monospace;">Difficulty: Normal</span></p>
+
+
+
+
+
+<p id="pointsContainer" style="position:absolute; top: 94%;  left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%); font-family: 'Courier New', monospace;">Current points: <span id="pointsCounter">0</span></p>
+
+
+<div id="skinContainer" style="border-radius: 10px; background-color:lightgray; position: absolute; padding-top: 10px; padding-bottom: 10px; top: 105%;  left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+
+	<span id = "skinImagesContainer">
+		<img id="skinImage1" src="redsquare1.png" width=50 height=50 style="cursor: default; padding: 0 10px; display: inline;">
+		<img id="skinImage2" src="orangesquare1.png" width=50 height=50 style="cursor: pointer; padding: 0 10px; display: none;" onclick="purchase('orange', 100);">
+		<img id="skinImage3" src="yellowsquare1.png" width=50 height=50 style="cursor: pointer; padding: 0 10px; display: none;"onclick="purchase('yellow', 500);">
+		<img id="skinImage4" src="greensquare1.png" width=50 height=50 style="cursor: pointer; padding: 0 10px; display: none;" onclick="purchase('green', 1500);">
+		<img id="skinImage5" src="bluesquare1.png" width=50 height=50 style="cursor: pointer; padding: 0 10px; display: none;" onclick="purchase('blue', 5000);">
+		<img id="skinImage6" src="purplesquare1.png" width=50 height=50 style="cursor: pointer; padding: 0 10px; display: none;" onclick="purchase('purple', 10000);">
+		<img id="skinImage7" src="camosquare1.png" width=50 height=50 style="cursor: pointer; padding: 0 10px; display: none;" onclick="purchase('camo', 100000);">
+	</span>
+
+	<img src="arrow.png" style="cursor:pointer;" width=30 height=50 display="block" onclick="skinRotateRight();">
+
+	<br>
+	<span id = "skinTextContainer" style="font-family: 'Courier New', monospace; font-size: 12px;">
+		<p id = "skinText1" style="word-wrap: break-word; max-width:60px; text-align: center; padding-left:10%; display: inline;">0 Points</p>
+		<p id = "skinText2" style="word-wrap: break-word; max-width:60px; text-align: center; padding-right:10%; display: none;">100 Points</p>
+		<p id = "skinText3" style="word-wrap: break-word; max-width:60px; text-align: center; padding-left:10%; display: none;">500 Points</p>
+		<p id = "skinText4" style="word-wrap: break-word; max-width:60px; text-align: center; padding-right:10%; display: none;">1500 Points</p>
+		<p id = "skinText5" style="word-wrap: break-word; max-width:60px; text-align: center; padding-left:10%; display: none;">5000 Points</p>
+		<p id = "skinText6" style="word-wrap: break-word; max-width:60px; text-align: center; padding-right:10%; display: none;">10,000 Points</p>
+		<p id = "skinText7" style="word-wrap: break-word; max-width:60px; text-align: center; padding-right:10%; display: none;">100,000 Points</p>
+
+	</span>
+	
+
+	
+	<br>
+	<script>
+		
+
+
+
+
+		var isDarkMode = false;
+		function enableDarkMode(){
+			if (isDarkMode){ //not darjk mode
+				document.getElementById("bodyContainer").style.background="white";
+				document.getElementById("centerInfo").style.color="black";
+				document.getElementById("centerInfoMobileLandscape").style.color="black";
+				document.getElementById("centerInfoMobilePortrait").style.color="black";
+
+				document.getElementById("statistics").style.backgroundColor = "#D9D9D9"
+
+				document.getElementById("highScoreContainer").style.color="black";
+				document.getElementById("highScoreContainerMobilePortrait").style.color="black";
+				document.getElementById("highScoreContainerMobileLandscape").style.color="black";
+
+				document.getElementById("difficultyContainer").style.color="black";
+				document.getElementById("pointsContainer").style.color="black";
+
+				document.getElementById("skinContainer").style.backgroundColor = "lightgray";
+
+				// document.getElementById("myGameArea").canvas.style.borderColor= "white";
+				myGameArea.canvas.style.borderColor = "black";
+
+				isDarkMode = !isDarkMode;
+			}
+			else{
+				document.getElementById("bodyContainer").style.background="black";
+				document.getElementById("centerInfo").style.color="white";
+				document.getElementById("centerInfoMobileLandscape").style.color="white";
+				document.getElementById("centerInfoMobilePortrait").style.color="white";
+
+				document.getElementById("statistics").style.backgroundColor = "#808080"
+
+				document.getElementById("highScoreContainer").style.color="white";
+				document.getElementById("highScoreContainerMobilePortrait").style.color="white";
+				document.getElementById("highScoreContainerMobileLandscape").style.color="white";
+
+
+				document.getElementById("difficultyContainer").style.color="white";
+				document.getElementById("pointsContainer").style.color="white";
+
+				document.getElementById("skinContainer").style.backgroundColor = "darkgray";
+
+				// document.getElementById("myGameArea").canvas.style.borderColor= "black";
+				myGameArea.canvas.style.borderColor = "white";
+
+
+				isDarkMode = !isDarkMode;
+			}
+		}
+
+		function difficultySwap(){
+			if (jumpStrength==22.5){
+				jumpStrength=30;
+				difficultyContainer.innerHTML="Difficulty: Easy";
+			}
+			else if (jumpStrength==30){
+				jumpStrength=22.5;
+				difficultyContainer.innerHTML="Difficulty: Normal";
+			}
+		}
+
+		window.addEventListener('keydown', function(e) {
+		  if(e.keyCode == 32 && e.target == document.body) {
+		    e.preventDefault();
+		  }
+		});
+
+		var points = 0;
+
+		var rotationNumber = 1;
+		var equippedSkin="logo.png";
+
+		var ownedSkins=["red"];
+
+		function purchase(skin, cost){
+			var isPurchaseable = points>=cost;
+			for (let n = 0; n<ownedSkins.length; n++){
+				if (ownedSkins[n] == skin){
+					isPurchaseable=false;
+				}
+			}
+			if (isPurchaseable){
+				points -= cost;
+				pointsCounter.innerHTML=points;
+
+				ownedSkins[ownedSkins.length] = skin;
+
+				equippedSkin=skin;
+
+				if (rotationNumber==1){
+					document.getElementById("skinImage2").style.cursor="default";
+				}
+				if (rotationNumber==2){
+					document.getElementById("skinImage3").style.cursor="default";
+				}
+				if (rotationNumber==3){
+					document.getElementById("skinImage4").style.cursor="default";
+				}
+				if (rotationNumber==4){
+					document.getElementById("skinImage5").style.cursor="default";
+				}
+				if (rotationNumber==5){
+					document.getElementById("skinImage6").style.cursor="default";
+				}
+				if (rotationNumber==6){
+					document.getElementById("skinImage7").style.cursor="default";
+				}
+				if (rotationNumber==7){
+					document.getElementById("skinImage1").style.cursor="default";
+				}
+				saveGame();
+
+			}
+		}
+
+		function skinRotateRight(){
+			console.log("rotated left")
+			if (rotationNumber == 1){
+				document.getElementById("skinImage1").style.display="none";
+				document.getElementById("skinImage2").style.display="inline";
+
+				document.getElementById("skinText1").style.display="none";
+				document.getElementById("skinText2").style.display="inline";
+
+				if (points<100 || ownedSkins.includes("orange")){
+					document.getElementById("skinImage2").style.cursor="default";
+				}
+				else {
+					document.getElementById("skinImage2").style.cursor="pointer";
+				}
+
+				if (ownedSkins.includes("orange")){
+					equippedSkin="orange";
+				}
+			}
+			if (rotationNumber == 2){
+				document.getElementById("skinImage2").style.display="none";
+				document.getElementById("skinImage3").style.display="inline";
+
+				document.getElementById("skinText2").style.display="none";
+				document.getElementById("skinText3").style.display="inline";
+
+				if (points<500 || ownedSkins.includes("yellow")){
+					document.getElementById("skinImage3").style.cursor="default";
+				}
+				else {
+					document.getElementById("skinImage3").style.cursor="pointer";
+				}
+				
+				if (ownedSkins.includes("yellow")){
+					equippedSkin="yellow";
+				}
+			}
+			if (rotationNumber == 3){
+				document.getElementById("skinImage3").style.display="none";
+				document.getElementById("skinImage4").style.display="inline";
+
+				document.getElementById("skinText3").style.display="none";
+				document.getElementById("skinText4").style.display="inline";
+
+				if (points<1500 || ownedSkins.includes("green")){
+					document.getElementById("skinImage4").style.cursor="default";
+				}
+				else {
+					document.getElementById("skinImage4").style.cursor="pointer";
+				}
+
+				if (ownedSkins.includes("green")){
+					equippedSkin="green";
+				}
+			}
+			if (rotationNumber == 4){
+				document.getElementById("skinImage4").style.display="none";
+				document.getElementById("skinImage5").style.display="inline";
+
+				document.getElementById("skinText4").style.display="none";
+				document.getElementById("skinText5").style.display="inline";
+
+				if (points<5000 || ownedSkins.includes("blue")){
+					document.getElementById("skinImage5").style.cursor="default";
+				}
+				else {
+					document.getElementById("skinImage5").style.cursor="pointer";
+				}
+				
+				if (ownedSkins.includes("blue")){
+					equippedSkin="blue";
+				}
+			}
+			if (rotationNumber == 5){
+				document.getElementById("skinImage5").style.display="none";
+				document.getElementById("skinImage6").style.display="inline";
+
+				document.getElementById("skinText5").style.display="none";
+				document.getElementById("skinText6").style.display="inline";
+
+				if (points<10000 || ownedSkins.includes("purple")){
+					document.getElementById("skinImage6").style.cursor="default";
+				}
+				else {
+					document.getElementById("skinImage6").style.cursor="pointer";
+				}
+				
+				if (ownedSkins.includes("purple")){
+					equippedSkin="purple";
+				}
+			}
+			if (rotationNumber == 6){
+				document.getElementById("skinImage6").style.display="none";
+				document.getElementById("skinImage7").style.display="inline";
+
+				document.getElementById("skinText6").style.display="none";
+				document.getElementById("skinText7").style.display="inline";
+
+				if (points<10000 || ownedSkins.includes("camo")){
+					document.getElementById("skinImage7").style.cursor="default";
+				}
+				else {
+					document.getElementById("skinImage7").style.cursor="pointer";
+				}
+				
+				if (ownedSkins.includes("camo")){
+					equippedSkin="camo";
+				}
+			}
+			if (rotationNumber == 7){
+				document.getElementById("skinImage7").style.display="none";
+				document.getElementById("skinImage1").style.display="inline";
+
+				document.getElementById("skinText7").style.display="none";
+				document.getElementById("skinText1").style.display="inline";
+
+				rotationNumber = 0;
+				equippedSkin="red";
+			}
+			rotationNumber += 1;
+			
+		}
+	</script>
+
+</div>
+
+
+
+<center>
+	<div id="copyrightContainer" style="background-color:lightgray; margin: 0; position: absolute; top: 115%;  left: 50%; -ms-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">
+		<img src="copyright.png"  width="458.25" height="17.25">
+	</div>
+</center>
+
+<div id="canvascontainer"></div>
+
+
+<script>
+	var portraitNotified = false;
+
+	setInterval(function(){
+		if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+			 document.getElementById("centerInfo").style.display="none";
+			 document.getElementById("jumpButton").style.display="none";
+
+
+			 document.getElementById("highScoreContainer").style.display="none";
+
+
+			if (window.innerHeight<window.innerWidth){ //landscape
+				document.getElementById("centerInfoMobilePortrait").style.display="none";
+				document.getElementById("centerInfoMobileLandscape").style.display="block";
+
+				document.getElementById("highScoreContainerMobilePortrait").style.display="none";
+				document.getElementById("highScoreContainerMobileLandscape").style.display="block";
+
+				document.getElementById("copyrightContainer").style.top = "140%";
+
+				highScoreCounter2.innerHTML=highScore;
+
+				document.getElementById("pointsContainer").style.top="95%";
+				document.getElementById("skinContainer").style.top="125%";
+
+				document.getElementById("difficultyContainer").style.top="105%";
+
+				portraitNotified=false;
+			}
+			else if (window.innerHeight>window.innerWidth){ //portrait
+				if (!portraitNotified){
+					alert("We reccomend that you use landscape for the best experience. Thanks!");
+					portraitNotified=true;
+				}
+
+				highScoreCounter1.innerHTML=highScore;
+
+				document.getElementById("centerInfoMobilePortrait").style.display="block";
+				document.getElementById("centerInfoMobileLandscape").style.display="none";
+
+				document.getElementById("highScoreContainerMobilePortrait").style.display="block";
+				document.getElementById("highScoreContainerMobileLandscape").style.display="none";
+
+				document.getElementById("skinContainer").style.top="85%"
+				document.getElementById("pointsContainer").style.top="75%"
+
+				document.getElementById("difficultyContainer").style.top="105%";
+			}
+
+
+
+
+		}
+	}, 500);
+
+
+
+
+
+
+	var touchHolding = false;
+
+	var jumpStrength = 22.5;
+
+	var highScore = 0;
+	var gameSpeed;
+
+
+
+	var myGamePiece;
+
+	var myBackgroundSun;
+	var myBackgroundFloor;
+	var myBackgroundSky;
+
+	var myObstacles = [];
+	var myFlyingObstacles = [];
+
+	var myScore;
+
+	function startGame() {
+		  //myGamePiece = new component(30, 30, "#FF0000", 30, 120);
+
+			myGamePiece = new component(30, 30, "redsquare1.png", 30, 120, "image");
+
+			if (equippedSkin == "red"){
+				myGamePiece.image.src = "redsquare1.png";
+			}
+			if (equippedSkin == "orange"){
+				myGamePiece.image.src = "orangesquare1.png";
+			}
+			if (equippedSkin == "yellow"){
+				myGamePiece.image.src = "yellowsquare1.png";
+			}
+			if (equippedSkin == "green"){
+				myGamePiece.image.src = "greensquare1.png";
+			}
+			if (equippedSkin == "blue"){
+				myGamePiece.image.src = "bluesquare1.png";
+			}
+			if (equippedSkin == "purple"){
+				myGamePiece.image.src = "purplesquare1.png";
+			}
+			if (equippedSkin == "camo"){
+				myGamePiece.image.src = "camosquare1.png";
+			}
+
+			myGamePiece.y = 150 - myGamePiece.height;
+
+			myBackgroundFloor = new component(480, 120, "floorBackground.png", 0, 150, "background");
+			myBackgroundSky = new component(1000, 160, "sky.png", 0, 0, "background");
+			//myBackgroundSun = new component(60, 60, "sun.png", 0, 0, "image");
+
+	  	myObstacle = new component(10, 200, "green", 300, 120);
+
+	  	myScore = new component("15px", "Courier New", "black", 340, 235, "text");
+
+	  	gameSpeed = 5;
+
+			myGameArea.start();
+
+	  
+	}
+
+	function enableStatistics(){
+		document.getElementById("statisticsEnabler").style.display="none";
+		document.getElementById("statistics").style.display="block";
+	}
+
+	function disableStatistics(){
+		document.getElementById("statisticsEnabler").style.display="block";
+		document.getElementById("statistics").style.display="none";
+	}
+
+	function saveGame(){
+		var gameSave = {
+			highScore: highScore,
+			points: points,
+			ownedSkins: ownedSkins
+		};
+		localStorage.setItem("gameSave", JSON.stringify(gameSave));
+	}
+
+	function loadGame(){
+		var savedGame = JSON.parse(localStorage.getItem("gameSave"));
+		if (typeof savedGame.highScore !== "undefined") highScore = savedGame.highScore;
+		if (typeof savedGame.points !== "undefined") points = savedGame.points;
+		if (typeof savedGame.ownedSkins !== "undefined") ownedSkins = savedGame.ownedSkins;
+		
+		highScoreCounter.innerHTML=highScore;
+		pointsCounter.innerHTML=points;
+	}
+
+	// window.onload = function(){
+	// 	loadGame();
+	// 	highScoreCounter.innerHTML = highScore;
+	// }
+
+	function restartGame(){
+		document.getElementById("myfilter").style.display = "none";
+		document.getElementById("myrestartbutton").style.display = "none";
+
+		myGameArea.stop();
+		myGameArea.clear();
+
+		// myGameArea = {};
+		myGamePiece = {};
+		myObstacles = [];
+		myScore = {};
+
+		numOfObstacles=0;
+
+		startGame();
+	}
+
+
+	var myGameArea = {
+	  canvas : document.createElement("canvas"),
+
+
+
+	  start : function() {
+	    this.canvas.width = 480;
+	    this.canvas.height = 270;
+
+
+
+	    this.context = this.canvas.getContext("2d");
+	    document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+	    this.frameNo = 0;
+	    this.interval = setInterval(updateGameArea, 20);
+
+	    // this. canvas.addEventListener('click', () => {
+   		// 		buttonPressed();
+			// 	}
+			// );
+
+			
+
+			if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+				this. canvas.addEventListener('touchstart', () => {
+	   				objectCharge();
+	   				touchHolding = true;
+					}
+				);
+				this. canvas.addEventListener('touchend', () => {
+						touchHolding = false;
+	   				jumpPlayer();
+					}
+				);
+			}
+			else{
+				this. canvas.addEventListener('mousedown', () => {
+   				objectCharge();
+					}
+				);
+				this. canvas.addEventListener('mouseup', () => {
+   				jumpPlayer();
+					}
+				);
+			}
+
+	  },
+	  clear : function() {
+	    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+	  },
+	  stop : function() {
+	  		
+	  		//myGamePiece.image.src = "redsquare3.png";
+	      clearInterval(this.interval);
+	      gameSpeed = 0;
+	  }
+	}
+
+
+
+
+	function everyinterval(n) {
+		if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+		return false;
+	}
+
+
+
+	function component(width, height, color, x, y, type) {
+			this.type = type;
+
+		  if (type == "image" || type == "background") {
+				this.image = new Image();
+        this.image.src = color;
+		  }
+
+
+	  	this.width = width;
+	  	this.height = height;
+	  	
+	  	this.isJumping = false;
+	  	this.speedX = 0;
+	  	this.speedY = 0;
+
+	  	this.x = x;
+	  	this.y = y;
+
+	  	this.flyStartTime = 0;
+
+	  	this.update = function(){
+				ctx = myGameArea.context;
+				if (this.type == "text"){
+					ctx.font = this.width + " " + this.height;
+					ctx.fillStyle = color;
+					ctx.fillText(this.text, this.x, this.y);
+				}
+				else if (type == "image" || type == "background") {
+	      	ctx.drawImage(this.image,
+	        	this.x,
+	        	this.y,
+	        	this.width, this.height);
+
+	      	if (type == "background") {
+            ctx.drawImage(this.image, 
+                this.x + this.width, 
+                this.y,
+                this.width, this.height);
+        	}
+	    	}
+				else {
+					ctx.fillStyle = color;
+					ctx.fillRect(this.x, this.y, this.width, this.height);
+				}
+
+				if (this.flyStartTime != 0){
+					this.y += -(20-((myGameArea.frameNo - this.flyStartTime)%40))/10;
+				}
+		}
+
+		this.newPos = function() {
+			this.y += this.speedY;
+			this.x += this.speedX;
+
+			if (this.type == "background") {
+			  if (this.x <= -(this.width)) {
+			     this.x = 0;
+			   }
+			}
+		}
+
+		this.crashWith = function(otherobj) {
+		    var myleft = this.x;
+		    var myright = this.x + (this.width);
+		    var mytop = this.y;
+		    var mybottom = this.y + (this.height);
+
+		    var otherleft = otherobj.x;
+		    var otherright = otherobj.x + (otherobj.width);
+		    var othertop = otherobj.y;
+		    var otherbottom = otherobj.y + (otherobj.height);
+
+		    var crash = false;
+		    if (!((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright))) {
+		      crash = true;
+		    }
+		    return crash;
+		  }
+
+	}
+
+
+	var jumpStartTime = myGameArea.frameNo;
+
+	var skymode = 0;
+
+	var numOfObstacles = 0;
+
+	function updateGameArea() {
+		saveGame();
+
+		
+		if (!isDarkMode)
+		 myGameArea.canvas.style = "position: absolute; top: 100px; left: 0px; right: 0px; bottom: 0px; margin: auto; border:2px solid black; cursor: pointer";
+		else
+			myGameArea.canvas.style = "position: absolute; top: 100px; left: 0px; right: 0px; bottom: 0px; margin: auto; border:2px solid white; cursor: pointer";
+
+
+		var x;
+		var y;
+
+		
+		if (touchHolding){
+			objectCharge();
+		}
+
+		for (i = 0; i < myObstacles.length; i += 1){
+			if (myGamePiece.crashWith(myObstacles[i])){
+				
+				// myGamePiece.image.src = "redsquare3.png";
+				// myGamePiece.update();
+
+				myGameArea.stop();
+
+				if (equippedSkin == "red"){
+					myGamePiece.image.src = "redsquare3.png";
+				}
+				if (equippedSkin == "orange"){
+					myGamePiece.image.src = "orangesquare3.png";
+				}
+				if (equippedSkin == "yellow"){
+					myGamePiece.image.src = "yellowsquare3.png";
+				}
+				if (equippedSkin == "green"){
+					myGamePiece.image.src = "greensquare3.png";
+				}
+				if (equippedSkin == "blue"){
+					myGamePiece.image.src = "bluesquare3.png";
+				}
+				if (equippedSkin == "purple"){
+					myGamePiece.image.src = "purplesquare3.png";
+				}
+				if (equippedSkin == "camo"){
+					myGamePiece.image.src = "camosquare3.png";
+				}
+
+				myGamePiece.newPos();    
+				myGamePiece.update();
+
+				if (numOfObstacles > 3){
+					points = points + Math.floor(myGameArea.frameNo / 50);
+				}
+
+				pointsCounter.innerHTML=points;
+				saveGame();
+				if (myGameArea.frameNo > highScore){
+	  			highScore = myGameArea.frameNo;
+	  			highScoreCounter.innerHTML = highScore;
+	  			highScoreCounter1.innerHTML = highScore;
+	  			highScoreCounter2.innerHTML = highScore;
+	  			
+	  		}
+				document.getElementById("myfilter").style.display = "block";
+				document.getElementById("myrestartbutton").style.display = "block";
+				return;
+
+				
+			}
+		}
+		
+		myGameArea.clear();
+
+		if (gameSpeed!=0){
+			myGameArea.frameNo += 1;
+		}
+
+		myBackgroundSky.speedX = -.1 * gameSpeed;
+		if (everyinterval(1000)){
+			if (skymode==0){
+				myBackgroundSky.image.src = "sky2.png";
+				//myBackgroundSun.image.src = "moon.png"
+				skymode = 1;
+			}
+			else{
+				myBackgroundSky.image.src = "sky.png";
+				//myBackgroundSun.image.src = "sun.png"
+				skymode = 0;
+			}
+
+
+
+		}
+		myBackgroundSky.newPos();
+		myBackgroundSky.update();
+
+		// myBackgroundSun.newPos();
+		// myBackgroundSun.update();
+
+		if (myGameArea.frameNo == 1 || everyinterval(110-Math.floor(Math.sqrt(myGameArea.frameNo)*.05))){
+			if (myGameArea.frameNo<100){
+				gameSpeed += .15;
+				x = myGameArea.canvas.width;
+				y = myGameArea.canvas.height;
+
+				minHeight = 30;
+				maxHeight = 50;
+				height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+
+				minWidth = 40;
+				maxWidth = 60;
+				width = Math.floor(Math.random()*(maxWidth-minWidth+1)+minWidth);
+
+				
+
+				if (myObstacles.push(new component(width, height, "greensludge.png", x, y - 120 - height, "image")) % 3 == 0){
+					myObstacles.shift();
+				}
+
+				numOfObstacles++;
+			}
+			else{
+				var obstacleFlying = Math.floor(Math.random()*5)==0;
+
+				if (!obstacleFlying){ //not flying
+					gameSpeed += .15;
+					x = myGameArea.canvas.width;
+					y = myGameArea.canvas.height;
+
+					minHeight = 30;
+					maxHeight = 50;
+					height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+
+					minWidth = 40;
+					maxWidth = 60;
+					width = Math.floor(Math.random()*(maxWidth-minWidth+1)+minWidth);
+
+					
+
+					if (myObstacles.push(new component(width, height, "greensludge.png", x, y - 120 - height, "image")) % 3 == 0){
+						myObstacles.shift();
+					}
+
+					numOfObstacles++;
+				}
+				else{ //flying
+					console.log("flyingSpawned")
+					gameSpeed += .15;
+					x = myGameArea.canvas.width;
+					y = myGameArea.canvas.height;
+
+					minHeight = 20;
+					maxHeight = 40;
+					height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+
+					minWidth = 20;
+					maxWidth = 50;
+					width = Math.floor(Math.random()*(maxWidth-minWidth+1)+minWidth);
+
+					
+
+					if (myObstacles.push(new component(width, height, "greensludge.png", x, y - 145 - height, "image")) % 3 == 0){
+						myObstacles.shift();
+						myObstacles[myObstacles.length-1].flyStartTime = myGameArea.frameNo;
+					}
+
+					numOfObstacles++;
+				}
+			}
+
+		}
+
+		for (i = 0; i < myObstacles.length; i += 1){
+			myObstacles[i].x -= gameSpeed;
+			myObstacles[i].update();
+		}
+			
+		
+		myGamePiece.newPos();    
+		myGamePiece.update();
+
+		// ctx1 = myGameArea.context;
+		// ctx1.fillStyle = "black";
+		// ctx1.fillRect(0, 270, 480, -120);
+
+		myBackgroundFloor.speedX = -1 * gameSpeed;
+		myBackgroundFloor.newPos();
+		myBackgroundFloor.update();
+
+		
+
+		if (myGamePiece.isJumping){
+
+				
+				// if (myGameArea.frameNo - jumpStartTime < (jumpStrength - (0))){
+				// 	myGamePiece.image.src = "redsquare2.png";
+				// 	myGamePiece.y += 10 * (myGameArea.frameNo - jumpStartTime - (jumpStrength - (0)))/(jumpStrength - (0));
+				// }
+				// else if (myGameArea.frameNo - jumpStartTime == (jumpStrength - (0))){
+				// 	tempnum=myGameArea.frameNo-jumpStartTime;
+				// }
+				// else if (myGameArea.frameNo - jumpStartTime < 2*(jumpStrength - (0))){
+				// 	myGamePiece.image.src = "redsquare1.png";
+				// 	myGamePiece.y += 10 * (myGameArea.frameNo*0 +tempnum - jumpStartTime - (jumpStrength - (0)))/(jumpStrength - (0)); 
+				// }
+				// else {
+				// 	myGamePiece.image.src = "redsquare1.png";
+				// 	//myGamePiece.y = 120;
+				// 	myGamePiece.isJumping = false;
+				// }
+
+
+				if (myGameArea.frameNo-jumpStartTime < (jumpStrength*2)/(gameSpeed/8) -1){
+					myGamePiece.speedY = -((jumpStrength/(gameSpeed/8) - (myGameArea.frameNo-jumpStartTime))/2.7) * (gameSpeed/8) * (gameSpeed/8);
+				}
+				else{
+					myGamePiece.speedY = 0;
+
+
+					if (equippedSkin == "red"){
+						myGamePiece.image.src = "redsquare1.png";
+					}
+					if (equippedSkin == "orange"){
+						myGamePiece.image.src = "orangesquare1.png";
+					}
+					if (equippedSkin == "yellow"){
+						myGamePiece.image.src = "yellowsquare1.png";
+					}
+					if (equippedSkin == "green"){
+						myGamePiece.image.src = "greensquare1.png";
+					}
+					if (equippedSkin == "blue"){
+						myGamePiece.image.src = "bluesquare1.png";
+					}
+					if (equippedSkin == "purple"){
+						myGamePiece.image.src = "purplesquare1.png";
+					}
+					if (equippedSkin == "camo"){
+						myGamePiece.image.src = "camosquare1.png";
+					}
+					
+
+					myGamePiece.y = 150 - myGamePiece.height;
+					myGamePiece.isJumping = false;
+				}
+
+				if (myGamePiece.speedY < 0){
+					if (equippedSkin == "red"){
+						myGamePiece.image.src = "redsquare2.png";
+					}
+					if (equippedSkin == "orange"){
+						myGamePiece.image.src = "orangesquare2.png";
+					}
+					if (equippedSkin == "yellow"){
+						myGamePiece.image.src = "yellowsquare2.png";
+					}
+					if (equippedSkin == "green"){
+						myGamePiece.image.src = "greensquare2.png";
+					}
+					if (equippedSkin == "blue"){
+						myGamePiece.image.src = "bluesquare2.png";
+					}
+					if (equippedSkin == "purple"){
+						myGamePiece.image.src = "purplesquare2.png";
+					}
+					if (equippedSkin == "camo"){
+						myGamePiece.image.src = "camosquare2.png";
+					}
+				}
+				else {
+					if (equippedSkin == "red"){
+						myGamePiece.image.src = "redsquare1.png";
+					}
+					if (equippedSkin == "orange"){
+						myGamePiece.image.src = "orangesquare1.png";
+					}
+					if (equippedSkin == "yellow"){
+						myGamePiece.image.src = "yellowsquare1.png";
+					}
+					if (equippedSkin == "green"){
+						myGamePiece.image.src = "greensquare1.png";
+					}
+					if (equippedSkin == "blue"){
+						myGamePiece.image.src = "bluesquare1.png";
+					}
+					if (equippedSkin == "purple"){
+						myGamePiece.image.src = "purplesquare1.png";
+					}
+					if (equippedSkin == "camo"){
+						myGamePiece.image.src = "camosquare1.png";
+					}
+				}
+				
+			}
+			
+
+			myScore.text = "SCORE: " + myGameArea.frameNo;
+			myScore.update();
+			saveGame();
+
+			if (everyinterval(100)){
+				gameSpeed += .05;
+			}
+
+			if (myGameArea.frameNo % 3 == 0){
+				objectHeightcounter.innerHTML= Math.floor(myGamePiece.y*100)/100;
+				objectSpeedCounter.innerHTML = -Math.floor(myGamePiece.speedY*100)/100;
+				obstacleCounter.innerHTML = numOfObstacles;
+				gameSpeedCounter.innerHTML = Math.floor(gameSpeed*100)/100;
+			}
+	}
+
+	
+
+	function jumpPlayer() {
+		if (myGamePiece.isJumping == false){
+			myGamePiece.height = 30;
+			jumpStartTime = myGameArea.frameNo;
+			myGamePiece.isJumping = true;
+		}
+	}
+
+	function buttonPressed(){
+		if (document.getElementById("myrestartbutton").style.display == "block"){
+			restartGame();
+		}
+		else{
+			//myGamePiece.height=30;
+			jumpPlayer();
+		}
+	}
+
+	function objectCharge(){
+		if (!myGamePiece.isJumping){
+			myGamePiece.height=20;
+			myGamePiece.y=150-myGamePiece.height;
+			myGamePiece.update();
+			myGamePiece.newPos();
+		}
+	}	
+
+	
+
+
+
+
+</script>
+
+</body>
+</html>
